@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "cw-basics-backend"
+version = "0.1.0"
+description = ""
+authors = ["aisaev <an.isaev7@gmail.com>"]
+readme = "README.md"
+packages = [{include = "cw_basics_backend"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+marshmallow-dataclass = "^8.5.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
