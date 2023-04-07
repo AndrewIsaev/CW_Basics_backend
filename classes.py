@@ -4,19 +4,25 @@ from datetime import datetime
 from dataclasses import dataclass, field
 
 
-@dataclass()
+@dataclass
 class Currency:
     name: str
     code: str
 
+    class Meta:
+        unknown = marshmallow.EXCLUDE
 
-@dataclass()
+
+@dataclass
 class OperationAmount:
     amount: str
     currency: Currency
 
+    class Meta:
+        unknown = marshmallow.EXCLUDE
 
-@dataclass()
+
+@dataclass
 class Operation:
     id: int
     date: str
@@ -50,7 +56,7 @@ class Operation:
         return True
 
     @property
-    def _dmy_date(self):
+    def _dmy_date(self) -> str:
         self.date = datetime.strptime(self.date, "%Y-%m-%dT%H:%M:%S.%f").date()
         return datetime.strftime(self.date, "%d.%m.%Y")
 
@@ -71,7 +77,7 @@ class Operation:
         return ""
 
     @staticmethod
-    def _get_account_name(message: str):
+    def _get_account_name(message: str) -> str:
         """
         Get account number from or to message
         :param message:
@@ -82,11 +88,11 @@ class Operation:
         return ""
 
     @property
-    def _hide_from(self):
+    def _hide_from(self) -> str:
         return f"{self._get_account_name(self.from_)} {self._get_account_number(self.from_)}"
 
     @property
-    def _hide_to(self):
+    def _hide_to(self) -> str:
         return f"{self._get_account_name(self.to)} {self._get_account_number(self.to)}"
 
 
